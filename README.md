@@ -6,9 +6,11 @@
 
 這是一個利用 Python 寫的爬蟲程式，可以抓取巴哈動畫網站中名字，開播時間，觀看次數，影片位址等，程式會將資料儲存至巴哈動畫.csv 檔案。並透過 Seaborn 套件繪製出指定不同年份前幾名觀看次數最高的影片資訊，以及各月份觀看次數的分佈。此專案可以幫助使用者了解獲取巴哈動畫網站上熱門動畫的觀看數、評分等數據，方便讓人快速知道有哪些動畫很紅，可以觀看
 
+&emsp;
 
+### 資料
 ![image](https://github.com/PDK9574/anime/blob/main/images/crawler_data.png)
-
+### 圖表
 ![image](https://github.com/PDK9574/anime/blob/main/images/viewRank.png)
 
 
