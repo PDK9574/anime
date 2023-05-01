@@ -28,7 +28,7 @@ def CheckConnect(url, headers):
 maxPage = 5
 # 圖表參數
 # 輸出搜尋資料中每一年份前幾筆觀看次數最高
-num =  5
+num =  10
 # 要查的年份
 selected_years = ["2023","2022"]
 # 迴圈搜尋結果頁數
@@ -110,8 +110,8 @@ def orderCsv(outputDf,num = 2,selected_years =[]):
     函數描述：
     輸出圖表關於搜尋資料中每一年分依觀看次數排序前幾名的動畫
     參數：
-    num: 每一年份前幾筆觀看次數最高 <=20
-    selected_years: 要查的年份 <=4
+    num: 每一年份前幾筆觀看次數最高 
+    selected_years: 要查的年份 
     """
     if num > 20 or len(selected_years) > 4:
         return 0
@@ -126,12 +126,12 @@ def orderCsv(outputDf,num = 2,selected_years =[]):
     # 輸出依觀看次數排序的資料年分為群組,是否符合查的年份
     outputDf = outputDf.groupby('year').apply(lambda x: x.nlargest(num, 'viewNum')).reset_index(drop=True)
     outputDf = outputDf[outputDf['year'].isin(selected_years)]
-
+    outputDf['year_theme'] = outputDf['year'].astype(str) + '_' + outputDf['themeName']
     # 設定圖表大小
     plt.figure(figsize=(20, 20))
     # 繪製長條圖
     # 設定標題和軸標籤
-    sns.catplot(data=outputDf.dropna(),x="month",  y='viewNum',hue="themeName" ,col ="year", palette='colorblind',kind="bar",col_wrap=2)
+    sns.catplot(data=outputDf.dropna(),x="month",  y='viewNum',hue="year_theme" ,col ="year", palette='colorblind',kind="bar",col_wrap=2)
     plt.suptitle(f"不同年份前{num}筆觀看次數最高的影片")
     plt.xlabel('month')
     plt.ylabel('viewNum')
